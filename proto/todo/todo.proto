@@ -1,0 +1,137 @@
+syntax = "proto3";
+
+package todo;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/bagastri07/Todolist-gRPC-Gateway/proto;todo";
+
+// Service to manage list of todo tasks
+service ToDoService {
+    // Create new todo task
+    rpc Create(CreateRequest) returns (CreateResponse) {
+        option (google.api.http) = {
+            post: "/todo"
+            body: "*"
+          };
+    };
+
+    // Read todo task
+    rpc Read(ReadRequest) returns (ReadResponse) {
+        option (google.api.http) = {
+            get: "/todo/{id}"
+          };
+    };
+
+    // Update todo task
+    rpc Update(UpdateRequest) returns (UpdateResponse) {
+        option (google.api.http) = {
+            put: "/todo"
+            body: "*"
+          };
+    };
+
+    // Delete todo task
+    rpc Delete(DeleteRequest) returns (DeleteResponse) {
+        option (google.api.http) = {
+            delete: "/todo/{id}"
+          };
+    };
+
+    // Read all todo tasks
+    rpc ReadAll(ReadAllRequest) returns (ReadAllResponse) {
+        option (google.api.http) = {
+            get: "/todo"
+          };
+    };
+
+    //markComplete
+    rpc MarkComplete(MarkRequest) returns (MarkResponse) {
+        option (google.api.http) = {
+            put: "/todo/mark/{id}" 
+          };
+    };
+}
+
+// Taks we have to do
+message ToDo {
+    // Unique integer identifier of the todo task
+    int32 id = 1;
+
+    // Title of the task
+    string title = 2;
+
+    // Detail description of the todo task
+    string description = 3;
+
+    // Date and time to remind the todo task
+    int32 completed = 4;
+}
+
+// Request data to create new todo task
+message CreateRequest{
+    // Task entity to add
+    ToDo toDo = 1;
+}
+
+// Contains data of created todo task
+message CreateResponse{
+    // ID of created task
+    int32 id = 1;
+}
+
+// Request data to read todo task
+message ReadRequest{
+    int32 id = 1;
+}
+
+// Contains todo task data specified in by ID request
+message ReadResponse{
+    // Task entity read by ID
+    ToDo toDo = 1;
+}
+
+// Request data to update todo task
+message UpdateRequest{
+    // Task entity to update
+    ToDo toDo = 1;
+}
+
+// Contains status of update operation
+message UpdateResponse{
+    // Contains number of entities have beed updated
+    // Equals 1 in case of succesfull update
+    int32 updated = 1;
+}
+
+// Request data to delete todo task
+message DeleteRequest{
+    // Unique integer identifier of the todo task to delete
+    int32 id = 1;
+}
+
+// Contains status of delete operation
+message DeleteResponse{
+    // Contains number of entities have beed deleted
+    // Equals 1 in case of succesfull delete
+    int32 deleted = 1;
+}
+
+// Request data to read all todo task
+message ReadAllRequest{}
+
+// Contains list of all todo tasks
+message ReadAllResponse{
+    repeated ToDo toDos = 1;
+}
+
+// to mark complete
+message MarkRequest{
+    // Unique integer identifier of the todo task to mark as complete
+    int32 id = 1;
+}
+
+// response after mark complete
+message MarkResponse{
+    int32 markedId = 1;
+}
