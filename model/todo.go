@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/guregu/null"
-	"github.com/satori/go.uuid"
+	uuid "github.com/satori/go.uuid"
 )
 
 var (
@@ -35,18 +35,18 @@ type Todo struct {
 	//[ 0] ID                                             integer              null: false  primary: true   isArray: false  auto: false  col: integer         len: -1      default: []
 	ID int32 `gorm:"primary_key;column:ID;type:integer;" json:"id"`
 	//[ 1] Title                                          text                 null: true   primary: false  isArray: false  auto: false  col: text            len: -1      default: []
-	Title sql.NullString `gorm:"column:Title;type:text;" json:"title"`
+	Title string `gorm:"column:Title;type:text;" json:"title"`
 	//[ 2] Description                                    text                 null: true   primary: false  isArray: false  auto: false  col: text            len: -1      default: []
-	Description sql.NullString `gorm:"column:Description;type:text;" json:"description"`
+	Description string `gorm:"column:Description;type:text;" json:"description"`
 	//[ 3] Completed                                      integer              null: true   primary: false  isArray: false  auto: false  col: integer         len: -1      default: [0]
-	Completed sql.NullInt64 `gorm:"column:Completed;type:integer;default:0;" json:"completed"`
+	Completed int32 `gorm:"column:Completed;type:integer;default:0;" json:"completed"`
 }
 
 var todoTableInfo = &TableInfo{
 	Name: "todo",
 	Columns: []*ColumnInfo{
 
-		&ColumnInfo{
+		{
 			Index:              0,
 			Name:               "ID",
 			Comment:            ``,
@@ -67,7 +67,7 @@ var todoTableInfo = &TableInfo{
 			ProtobufPos:        1,
 		},
 
-		&ColumnInfo{
+		{
 			Index:              1,
 			Name:               "Title",
 			Comment:            ``,
@@ -88,7 +88,7 @@ var todoTableInfo = &TableInfo{
 			ProtobufPos:        2,
 		},
 
-		&ColumnInfo{
+		{
 			Index:              2,
 			Name:               "Description",
 			Comment:            ``,
@@ -109,7 +109,7 @@ var todoTableInfo = &TableInfo{
 			ProtobufPos:        3,
 		},
 
-		&ColumnInfo{
+		{
 			Index:              3,
 			Name:               "Completed",
 			Comment:            ``,

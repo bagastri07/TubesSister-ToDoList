@@ -1,0 +1,29 @@
+POST http://localhost:7001/todo
+content-type: application/json
+
+{
+    "toDo": {
+        "title": "Belajar Youtube",
+        "description": "Cara membuat simple"
+    }
+}
+###
+GET  http://localhost:7001/todo/1
+###
+GET http://localhost:7001/todo
+###
+PUT http://localhost:7001/todo
+content-type: application/json
+
+{
+    "toDo": {
+        "id": 1,
+        "title": "Membuat Kopi",
+        "description": "Harus S-Grade",
+        "completed": 1
+    }
+}
+###
+DELETE http://localhost:7001/todo/3
+###
+PUT http://localhost:7001/todo/mark/4
