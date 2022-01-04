@@ -46,7 +46,7 @@ func (r *TodoRepository) CreateToDo(req *todo.CreateRequest) (*model.Todo, error
 func (r *TodoRepository) UpdateToDo(req *todo.UpdateRequest) (*todo.UpdateResponse, error) {
 	var todoData model.Todo
 
-	if err := r.dbClient.Where("ID = ?", req.ToDo.Id).First(&todoData).Error; err != nil {
+	if err := r.dbClient.Where("ID = ?", req.Id).First(&todoData).Error; err != nil {
 		return nil, err
 	}
 

@@ -12,13 +12,12 @@ GET  http://localhost:7001/todo/1
 ###
 GET http://localhost:7001/todo
 ###
-PUT http://localhost:7001/todo
+PUT http://localhost:7001/todo/1
 content-type: application/json
 
 {
     "toDo": {
-        "id": 1,
-        "title": "Membuat Kopi",
+        "title": "Membuat Ayam",
         "description": "Harus S-Grade",
         "completed": 1
     }

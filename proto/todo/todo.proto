@@ -26,7 +26,7 @@ service ToDoService {
     // Update todo task
     rpc Update(UpdateRequest) returns (UpdateResponse) {
         option (google.api.http) = {
-            put: "/todo"
+            put: "/todo/{id}"
             body: "*"
           };
     };
@@ -94,7 +94,8 @@ message ReadResponse{
 // Request data to update todo task
 message UpdateRequest{
     // Task entity to update
-    ToDo toDo = 1;
+    int32 id = 1;
+    ToDo toDo = 12;
 }
 
 // Contains status of update operation
