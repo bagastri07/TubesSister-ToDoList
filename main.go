@@ -16,6 +16,7 @@ func main() {
 
 	todoServiceServer := handlers.NewTodoServiceServer()
 
+	//grpc gateway
 	go func() {
 		//mux
 		mux := runtime.NewServeMux()
@@ -23,10 +24,10 @@ func main() {
 		protobuf.RegisterToDoServiceHandlerServer(context.Background(), mux, todoServiceServer)
 
 		//http server
-		log.Fatalln(http.ListenAndServe("localhost:7001", mux))
+		log.Fatalln(http.ListenAndServe("0.0.0.0:7001", mux))
 	}()
 
-	lis, err := net.Listen("tcp", "localhost:7000")
+	lis, err := net.Listen("tcp", "0.0.0.0:7000")
 	if err != nil {
 		log.Fatalf("Failed to listen to the port: %v", err)
 	}

@@ -18,9 +18,11 @@ func NewTodoRepository() *TodoRepository {
 	}
 }
 
-func (r *TodoRepository) ReadTodoByID(TodoID int32) (*model.Todo, error) {
+func (r *TodoRepository) ReadTodoByID(todoId int32) (*model.Todo, error) {
 	var todoData model.Todo
-	err := r.dbClient.First(&todoData, TodoID)
+
+	err := r.dbClient.First(&todoData, todoId)
+
 	if err.Error != nil {
 		return nil, err.Error
 	}
@@ -30,7 +32,7 @@ func (r *TodoRepository) ReadTodoByID(TodoID int32) (*model.Todo, error) {
 
 func (r *TodoRepository) CreateToDo(req *todo.CreateRequest) (*model.Todo, error) {
 	todoData := model.Todo{
-		Title:       req.ToDo.Title,
+		Title:       req.ToDo.GetTitle(),
 		Description: req.ToDo.GetDescription(),
 		Completed:   0,
 	}
@@ -46,7 +48,7 @@ func (r *TodoRepository) CreateToDo(req *todo.CreateRequest) (*model.Todo, error
 func (r *TodoRepository) UpdateToDo(req *todo.UpdateRequest) (*todo.UpdateResponse, error) {
 	var todoData model.Todo
 
-	if err := r.dbClient.Where("ID = ?", req.Id).First(&todoData).Error; err != nil {
+	if err := r.dbClient.Where("ID = ?", req.GetId()).First(&todoData).Error; err != nil {
 		return nil, err
 	}
 
