@@ -18,8 +18,8 @@ func NewTodoRepository() *TodoRepository {
 	}
 }
 
-func (r *TodoRepository) ReadTodoByID(todoId int32) (*model.Todo, error) {
-	var todoData model.Todo
+func (r *TodoRepository) ReadTodoByID(todoId int32) (*model.Todos, error) {
+	var todoData model.Todos
 
 	err := r.dbClient.First(&todoData, todoId)
 
@@ -30,8 +30,8 @@ func (r *TodoRepository) ReadTodoByID(todoId int32) (*model.Todo, error) {
 	return &todoData, nil
 }
 
-func (r *TodoRepository) CreateToDo(req *todo.CreateRequest) (*model.Todo, error) {
-	todoData := model.Todo{
+func (r *TodoRepository) CreateToDo(req *todo.CreateRequest) (*model.Todos, error) {
+	todoData := model.Todos{
 		Title:       req.ToDo.GetTitle(),
 		Description: req.ToDo.GetDescription(),
 		Completed:   0,
@@ -46,7 +46,7 @@ func (r *TodoRepository) CreateToDo(req *todo.CreateRequest) (*model.Todo, error
 }
 
 func (r *TodoRepository) UpdateToDo(req *todo.UpdateRequest) (*todo.UpdateResponse, error) {
-	var todoData model.Todo
+	var todoData model.Todos
 
 	if err := r.dbClient.Where("ID = ?", req.GetId()).First(&todoData).Error; err != nil {
 		return nil, err
@@ -68,7 +68,7 @@ func (r *TodoRepository) UpdateToDo(req *todo.UpdateRequest) (*todo.UpdateRespon
 }
 
 func (r *TodoRepository) ReadAll(req *todo.ReadAllRequest) (*todo.ReadAllResponse, error) {
-	var todos []model.Todo
+	var todos []model.Todos
 
 	if err := r.dbClient.Find(&todos).Error; err != nil {
 		return nil, err
@@ -91,7 +91,7 @@ func (r *TodoRepository) ReadAll(req *todo.ReadAllRequest) (*todo.ReadAllRespons
 }
 
 func (r *TodoRepository) DeleteTodo(req *todo.DeleteRequest) (*todo.DeleteResponse, error) {
-	var todoData model.Todo
+	var todoData model.Todos
 
 	result := r.dbClient.Delete(&todoData, req.GetId())
 
@@ -105,7 +105,7 @@ func (r *TodoRepository) DeleteTodo(req *todo.DeleteRequest) (*todo.DeleteRespon
 }
 
 func (r *TodoRepository) MarkToDo(req *todo.MarkRequest) (*todo.MarkResponse, error) {
-	var todoData model.Todo
+	var todoData model.Todos
 
 	if err := r.dbClient.Where("ID = ?", req.Id).First(&todoData).Error; err != nil {
 		return nil, err

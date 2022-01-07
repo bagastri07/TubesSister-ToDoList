@@ -1,28 +1,28 @@
-POST http://localhost:7001/todo
+ POST http://localhost:7001/todo
 content-type: application/json
 
 {
     "toDo": {
-        "title": "Belajar Youtube",
-        "description": "Cara membuat simple"
+        "title": "Belajar Bersama Sama",
+        "description": "Diskusi Sister"
     }
 }
 ###
-GET  http://localhost:7001/todo/1
+GET  http://localhost:7001/todo/3
 ###
-GET http://localhost:7001/todo
+GET http://26.101.162.91:7001/todo
 ###
-PUT http://localhost:7001/todo/1
+PUT http://localhost:7001/todo
 content-type: application/json
 
 {
     "toDo": {
-        "title": "Membuat Ayam",
-        "description": "Harus S-Grade",
-        "completed": 1
+        "id": 2,
+        "title": "Belajar dan Belajar",
+        "description": "Harus S-Grade"
     }
 }
 ###
-DELETE http://localhost:7001/todo/3
+DELETE http://localhost:7001/todo/1
 ###
-PUT http://localhost:7001/todo/mark/4
+PUT http://localhost:7001/todo/mark/3

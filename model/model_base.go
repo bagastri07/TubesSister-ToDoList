@@ -30,7 +30,7 @@ var (
 func init() {
 	tables = make(map[string]*TableInfo)
 
-	tables["todo"] = todoTableInfo
+	tables["todos"] = todosTableInfo
 }
 
 // String describe the action

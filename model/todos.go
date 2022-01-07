@@ -20,18 +20,18 @@ DB Table Details
 -------------------------------------
 
 
-CREATE TABLE `todo` (`ID` integer,`Title` text,`Description` text,`Completed` integer DEFAULT 0,PRIMARY KEY (`ID`))
+CREATE TABLE `todos` (`ID` integer,`Title` text,`Description` text,`Completed` integer DEFAULT 0,PRIMARY KEY (`ID`))
 
 JSON Sample
 -------------------------------------
-{    "id": 85,    "title": "MNHuEmtmIVRmfhAKoGpavutsM",    "description": "DoBXfphMKYZcFIKvbsZnsqlnF",    "completed": 44}
+{    "id": 90,    "title": "WYCArUJPPvRkKKfkZDnjimZHD",    "description": "ihhHcfJiLOLYhZLyYnSMmhwnj",    "completed": 44}
 
 
 
 */
 
-// Todo struct is a row record of the todo table in the main database
-type Todo struct {
+// Todos struct is a row record of the todos table in the main database
+type Todos struct {
 	//[ 0] ID                                             integer              null: false  primary: true   isArray: false  auto: false  col: integer         len: -1      default: []
 	ID int32 `gorm:"primary_key;column:ID;type:integer;" json:"id"`
 	//[ 1] Title                                          text                 null: true   primary: false  isArray: false  auto: false  col: text            len: -1      default: []
@@ -42,8 +42,8 @@ type Todo struct {
 	Completed int32 `gorm:"column:Completed;type:integer;default:0;" json:"completed"`
 }
 
-var todoTableInfo = &TableInfo{
-	Name: "todo",
+var todosTableInfo = &TableInfo{
+	Name: "todos",
 	Columns: []*ColumnInfo{
 
 		{
@@ -132,26 +132,26 @@ var todoTableInfo = &TableInfo{
 	},
 }
 
-// // TableName sets the insert table name for this struct type
-// func (t *Todo) TableName() string {
-// 	return "todo"
-// }
+// TableName sets the insert table name for this struct type
+func (t *Todos) TableName() string {
+	return "todos"
+}
 
-// // BeforeSave invoked before saving, return an error if field is not populated.
-// func (t *Todo) BeforeSave() error {
-// 	return nil
-// }
+// BeforeSave invoked before saving, return an error if field is not populated.
+func (t *Todos) BeforeSave() error {
+	return nil
+}
 
-// // Prepare invoked before saving, can be used to populate fields etc.
-// func (t *Todo) Prepare() {
-// }
+// Prepare invoked before saving, can be used to populate fields etc.
+func (t *Todos) Prepare() {
+}
 
-// // Validate invoked before performing action, return an error if field is not populated.
-// func (t *Todo) Validate(action Action) error {
-// 	return nil
-// }
+// Validate invoked before performing action, return an error if field is not populated.
+func (t *Todos) Validate(action Action) error {
+	return nil
+}
 
-// // TableInfo return table meta data
-// func (t *Todo) TableInfo() *TableInfo {
-// 	return todoTableInfo
-// }
+// TableInfo return table meta data
+func (t *Todos) TableInfo() *TableInfo {
+	return todosTableInfo
+}
