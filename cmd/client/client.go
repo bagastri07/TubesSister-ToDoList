@@ -144,17 +144,19 @@ func main() {
 
 			pressEnterMenu()
 		case 4:
-			fmt.Println("Update")
+			fmt.Println("Mengubah Todo List Berdasarkan ID")
 
 			var id int32
+			fmt.Println("Masukan Judul Baru Todo anda: ")
 			title := inputWithString()
+			fmt.Println("Masukan Deskripsi Baru Todo anda: ")
 			description := inputWithString()
 
 			res, err := todoServiceClient.Update(ctx, &todo.UpdateRequest{
 				Id:   id,
 				User: user,
 				ToDo: &todo.ToDo{
-					Title:       title,
+					Title: title,
 					Description: description,
 				},
 			})
@@ -164,9 +166,12 @@ func main() {
 			}
 
 			fmt.Println("Rowaffected:", res.GetUpdated())
+			fmt.Println("Todo List dengan id", id, "berhasil diupdate!")
 			pressEnterMenu()
 		case 5:
+			fmt.Println("Menandai Todo List (Mark as Done) Berdasarkan ID")
 			var id int32
+			fmt.Println("Masukan ID Todo anda: ")
 			fmt.Scanln(&id)
 			res, err := todoServiceClient.MarkComplete(ctx, &todo.MarkRequest{
 				Id:   id,
@@ -178,10 +183,13 @@ func main() {
 			}
 
 			fmt.Println("marsds:", res.GetMarkedId())
+			fmt.Println("Todo List dengan id", id, "berhasil ditandai!")
 			pressEnterMenu()
 
 		case 6:
+			fmt.Println("Menghapus Todo List Berdasarkan ID")
 			var id int32
+			fmt.Println("Masukan ID Todo anda: ")
 			fmt.Scanln(&id)
 
 			res, err := todoServiceClient.Delete(ctx, &todo.DeleteRequest{
@@ -194,6 +202,7 @@ func main() {
 			}
 
 			fmt.Println("rawAffected:", res.GetDeleted())
+			fmt.Println("Todo List dengan id", id, "berhasil dihapus!")
 			pressEnterMenu()
 		}
 	}
