@@ -15,7 +15,9 @@ import (
 
 const todoServiceAddress = "localhost:7000"
 
-func menuTodoList() {
+func menuTodoList(user string) {
+	fmt.Println("You're Log In as", user)
+
 	fmt.Println("1. Buat Todo Baru")
 	fmt.Println("2. Tampilkan Semua Todo List")
 	fmt.Println("3. Tampilakn Todo List Berdasarkan ID")
@@ -28,16 +30,21 @@ func menuTodoList() {
 }
 
 func pressEnterMenu() {
-	fmt.Print("Tekan Enter Untuk Kembali Ke Beranda")
+	fmt.Print("Tekan Enter Untuk Kembali Ke Beranda ...")
 	bufio.NewReader(os.Stdin).ReadBytes('\n')
 }
 
-func inputWithString() string {
+func inputWithSpace() string {
 	reader := bufio.NewReader(os.Stdin)
 	name, _ := reader.ReadString('\n')
 	name = strings.TrimSuffix(name, "\n")
 
 	return name
+}
+
+func showError(err error) {
+	fmt.Printf("\n%s \n\n", err.Error())
+	pressEnterMenu()
 }
 
 func main() {
@@ -66,18 +73,19 @@ func main() {
 	input = 0
 
 	for input != 7 {
-		menuTodoList()
+		menuTodoList(user)
 		fmt.Scanln(&input)
 		fmt.Println()
 		switch input {
 		case 1:
-			fmt.Println("Membuat Todo Baru \n")
+			fmt.Println("Membuat Todo Baru")
+			fmt.Println()
 
 			fmt.Print("Masukan Title     : ")
-			title := inputWithString()
+			title := inputWithSpace()
 
 			fmt.Print("Masukan Deskripsi : ")
-			desc := inputWithString()
+			desc := inputWithSpace()
 
 			res, err := todoServiceClient.Create(ctx, &todo.CreateRequest{
 				ToDo: &todo.ToDo{
@@ -89,20 +97,23 @@ func main() {
 			})
 
 			if err != nil {
-				panic(err)
+				showError(err)
+				break
 			}
 
 			fmt.Println("Todo Berhasil dibuat, id: ", res.GetId())
 			pressEnterMenu()
 		case 2:
-			fmt.Println("Tampilkan semua Todo List \n")
+			fmt.Println("Tampilkan semua Todo List")
+			fmt.Println()
 
 			res, err := todoServiceClient.ReadAll(ctx, &todo.ReadAllRequest{
 				User: user,
 			})
 
 			if err != nil {
-				panic(err)
+				showError(err)
+				break
 			}
 
 			if len(res.GetToDos()) == 0 {
@@ -135,12 +146,14 @@ func main() {
 			})
 
 			if err != nil {
-				panic(err)
+				showError(err)
+				break
+
 			}
 
-			fmt.Println("ID             :",res.GetToDo().Id)
-			fmt.Println("Title          :",res.GetToDo().Title)
-			fmt.Println("Description    :",res.GetToDo().Description)
+			fmt.Println("ID             :", res.GetToDo().Id)
+			fmt.Println("Title          :", res.GetToDo().Title)
+			fmt.Println("Description    :", res.GetToDo().Description)
 			if res.GetToDo().Completed == 0 {
 				fmt.Println("Completed      : Undone")
 			} else {
@@ -153,27 +166,29 @@ func main() {
 			fmt.Println("Mengubah Todo List Berdasarkan ID")
 
 			var id int32
-			fmt.Print("Masukan ID Todo :")
+			fmt.Print("Masukan ID Todo : ")
 			fmt.Scanln(&id)
 			fmt.Println("Masukan data baru")
-			fmt.Print("Title          :")
-			title := inputWithString()
-			fmt.Print("Description    :")
-			description := inputWithString()
+			fmt.Print("Title          : ")
+			title := inputWithSpace()
+			fmt.Print("Description    : ")
+			description := inputWithSpace()
 
 			res, err := todoServiceClient.Update(ctx, &todo.UpdateRequest{
 				Id:   id,
 				User: user,
 				ToDo: &todo.ToDo{
-					Title: title,
+					Title:       title,
 					Description: description,
 				},
 			})
 
 			if err != nil {
-				panic(err)
+				showError(err)
+				break
 			}
 
+			fmt.Println()
 			fmt.Println("Rowaffected:", res.GetUpdated())
 			fmt.Println("Todo List dengan id", id, "berhasil diupdate!")
 			fmt.Println()
@@ -189,7 +204,8 @@ func main() {
 			})
 
 			if err != nil {
-				panic(err)
+				showError(err)
+				break
 			}
 
 			fmt.Println("marsds:", res.GetMarkedId())
@@ -209,13 +225,16 @@ func main() {
 			})
 
 			if err != nil {
-				panic(err)
+				showError(err)
+				break
 			}
 
 			fmt.Println("rawAffected:", res.GetDeleted())
 			fmt.Println("Todo List dengan id", id, "berhasil dihapus!")
 			fmt.Println()
 			pressEnterMenu()
+		default:
+			fmt.Printf("Input salah, ulangi!!! \n\n")
 		}
 	}
 }

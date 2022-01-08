@@ -24,14 +24,10 @@ func NewTodoRepository() *TodoRepository {
 func (r *TodoRepository) ReadTodoByID(todoId int32, user string) (*model.Todos, error) {
 	var todoData model.Todos
 
-	err := r.dbClient.First(&todoData, todoId)
+	err := r.dbClient.Where("ID = ? AND User = ?", todoId, user).First(&todoData)
 
 	if err.Error != nil {
 		return nil, err.Error
-	}
-
-	if todoData.User != user {
-		return nil, errors.New("Access Denied! - Wrong User")
 	}
 
 	return &todoData, nil
@@ -121,7 +117,11 @@ func (r *TodoRepository) MarkToDo(req *todo.MarkRequest) (*todo.MarkResponse, er
 		return nil, err
 	}
 
-	todoData.Completed = 1
+	if todoData.Completed == 1 {
+		return nil, errors.New("Already Marked")
+	} else {
+		todoData.Completed = 1
+	}
 
 	result := r.dbClient.Save(&todoData)
 
