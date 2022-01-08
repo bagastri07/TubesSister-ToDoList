@@ -5,25 +5,24 @@ content-type: application/json
     "toDo": {
         "title": "Presentasi Sister",
         "description": "Diskusi Sister",
-        "user": "weee"
+        "user": "aku"
     }
 }
 ###
-GET  http://localhost:7001/todo/3
+GET  http://localhost:7001/todo/aku/5
 ###
-GET http://localhost:7001/todo
+GET http://localhost:7001/todo/aku
 ###
-PUT http://localhost:7001/todo
+PUT http://localhost:7001/todo/aku/5
 content-type: application/json
 
 {
     "toDo": {
-        "id": 2,
         "title": "Belajar dan Belajar",
         "description": "Harus S-Grade"
     }
 }
 ###
-DELETE http://localhost:7001/todo/1
+DELETE http://localhost:7001/todo/aku/5
 ###
-PUT http://localhost:7001/todo/mark/3
+PUT http://localhost:7001/todo/mark/aku/5
