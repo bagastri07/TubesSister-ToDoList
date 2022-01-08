@@ -76,6 +76,16 @@ func request_ToDoService_Read_0(ctx context.Context, marshaler runtime.Marshaler
 		_   = err
 	)
 
+	val, ok = pathParams["user"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "user")
+	}
+
+	protoReq.User, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "user", err)
+	}
+
 	val, ok = pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -101,6 +111,16 @@ func local_request_ToDoService_Read_0(ctx context.Context, marshaler runtime.Mar
 		err error
 		_   = err
 	)
+
+	val, ok = pathParams["user"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "user")
+	}
+
+	protoReq.User, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "user", err)
+	}
 
 	val, ok = pathParams["id"]
 	if !ok {
@@ -136,6 +156,16 @@ func request_ToDoService_Update_0(ctx context.Context, marshaler runtime.Marshal
 		_   = err
 	)
 
+	val, ok = pathParams["user"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "user")
+	}
+
+	protoReq.User, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "user", err)
+	}
+
 	val, ok = pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -170,6 +200,16 @@ func local_request_ToDoService_Update_0(ctx context.Context, marshaler runtime.M
 		_   = err
 	)
 
+	val, ok = pathParams["user"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "user")
+	}
+
+	protoReq.User, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "user", err)
+	}
+
 	val, ok = pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -195,6 +235,16 @@ func request_ToDoService_Delete_0(ctx context.Context, marshaler runtime.Marshal
 		err error
 		_   = err
 	)
+
+	val, ok = pathParams["user"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "user")
+	}
+
+	protoReq.User, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "user", err)
+	}
 
 	val, ok = pathParams["id"]
 	if !ok {
@@ -222,6 +272,16 @@ func local_request_ToDoService_Delete_0(ctx context.Context, marshaler runtime.M
 		_   = err
 	)
 
+	val, ok = pathParams["user"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "user")
+	}
+
+	protoReq.User, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "user", err)
+	}
+
 	val, ok = pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -241,6 +301,23 @@ func request_ToDoService_ReadAll_0(ctx context.Context, marshaler runtime.Marsha
 	var protoReq ReadAllRequest
 	var metadata runtime.ServerMetadata
 
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["user"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "user")
+	}
+
+	protoReq.User, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "user", err)
+	}
+
 	msg, err := client.ReadAll(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -249,6 +326,23 @@ func request_ToDoService_ReadAll_0(ctx context.Context, marshaler runtime.Marsha
 func local_request_ToDoService_ReadAll_0(ctx context.Context, marshaler runtime.Marshaler, server ToDoServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ReadAllRequest
 	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["user"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "user")
+	}
+
+	protoReq.User, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "user", err)
+	}
 
 	msg, err := server.ReadAll(ctx, &protoReq)
 	return msg, metadata, err
@@ -265,6 +359,16 @@ func request_ToDoService_MarkComplete_0(ctx context.Context, marshaler runtime.M
 		err error
 		_   = err
 	)
+
+	val, ok = pathParams["user"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "user")
+	}
+
+	protoReq.User, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "user", err)
+	}
 
 	val, ok = pathParams["id"]
 	if !ok {
@@ -291,6 +395,16 @@ func local_request_ToDoService_MarkComplete_0(ctx context.Context, marshaler run
 		err error
 		_   = err
 	)
+
+	val, ok = pathParams["user"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "user")
+	}
+
+	protoReq.User, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "user", err)
+	}
 
 	val, ok = pathParams["id"]
 	if !ok {
@@ -342,7 +456,7 @@ func RegisterToDoServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/todo.ToDoService/Read", runtime.WithHTTPPathPattern("/todo/{id}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/todo.ToDoService/Read", runtime.WithHTTPPathPattern("/todo/{user}/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -365,7 +479,7 @@ func RegisterToDoServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/todo.ToDoService/Update", runtime.WithHTTPPathPattern("/todo/{id}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/todo.ToDoService/Update", runtime.WithHTTPPathPattern("/todo/{user}/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -388,7 +502,7 @@ func RegisterToDoServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/todo.ToDoService/Delete", runtime.WithHTTPPathPattern("/todo/{id}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/todo.ToDoService/Delete", runtime.WithHTTPPathPattern("/todo/{user}/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -411,7 +525,7 @@ func RegisterToDoServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/todo.ToDoService/ReadAll", runtime.WithHTTPPathPattern("/todo"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/todo.ToDoService/ReadAll", runtime.WithHTTPPathPattern("/todo/{user}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -434,7 +548,7 @@ func RegisterToDoServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/todo.ToDoService/MarkComplete", runtime.WithHTTPPathPattern("/todo/mark/{id}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/todo.ToDoService/MarkComplete", runtime.WithHTTPPathPattern("/todo/mark/{user}/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -516,7 +630,7 @@ func RegisterToDoServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/todo.ToDoService/Read", runtime.WithHTTPPathPattern("/todo/{id}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/todo.ToDoService/Read", runtime.WithHTTPPathPattern("/todo/{user}/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -536,7 +650,7 @@ func RegisterToDoServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/todo.ToDoService/Update", runtime.WithHTTPPathPattern("/todo/{id}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/todo.ToDoService/Update", runtime.WithHTTPPathPattern("/todo/{user}/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -556,7 +670,7 @@ func RegisterToDoServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/todo.ToDoService/Delete", runtime.WithHTTPPathPattern("/todo/{id}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/todo.ToDoService/Delete", runtime.WithHTTPPathPattern("/todo/{user}/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -576,7 +690,7 @@ func RegisterToDoServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/todo.ToDoService/ReadAll", runtime.WithHTTPPathPattern("/todo"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/todo.ToDoService/ReadAll", runtime.WithHTTPPathPattern("/todo/{user}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -596,7 +710,7 @@ func RegisterToDoServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/todo.ToDoService/MarkComplete", runtime.WithHTTPPathPattern("/todo/mark/{id}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/todo.ToDoService/MarkComplete", runtime.WithHTTPPathPattern("/todo/mark/{user}/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -618,15 +732,15 @@ func RegisterToDoServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 var (
 	pattern_ToDoService_Create_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"todo"}, ""))
 
-	pattern_ToDoService_Read_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"todo", "id"}, ""))
+	pattern_ToDoService_Read_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 1, 0, 4, 1, 5, 2}, []string{"todo", "user", "id"}, ""))
 
-	pattern_ToDoService_Update_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"todo", "id"}, ""))
+	pattern_ToDoService_Update_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 1, 0, 4, 1, 5, 2}, []string{"todo", "user", "id"}, ""))
 
-	pattern_ToDoService_Delete_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"todo", "id"}, ""))
+	pattern_ToDoService_Delete_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 1, 0, 4, 1, 5, 2}, []string{"todo", "user", "id"}, ""))
 
-	pattern_ToDoService_ReadAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"todo"}, ""))
+	pattern_ToDoService_ReadAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"todo", "user"}, ""))
 
-	pattern_ToDoService_MarkComplete_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"todo", "mark", "id"}, ""))
+	pattern_ToDoService_MarkComplete_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 1, 0, 4, 1, 5, 3}, []string{"todo", "mark", "user", "id"}, ""))
 )
 
 var (

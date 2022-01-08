@@ -35,7 +35,7 @@ func (server *TodoServiceServer) Create(ctx context.Context, req *todo.CreateReq
 func (server *TodoServiceServer) Read(ctx context.Context, req *todo.ReadRequest) (*todo.ReadResponse, error) {
 	todoRepository := repositories.NewTodoRepository()
 
-	todoData, err := todoRepository.ReadTodoByID(req.GetId())
+	todoData, err := todoRepository.ReadTodoByID(req.GetId(), req.GetUser())
 	if err != nil {
 		return nil, fmt.Errorf("errror read todo: %v", err)
 	}
@@ -45,6 +45,7 @@ func (server *TodoServiceServer) Read(ctx context.Context, req *todo.ReadRequest
 		Title:       todoData.Title,
 		Description: todoData.Description,
 		Completed:   todoData.Completed,
+		User:        todoData.User,
 	}
 
 	return &todo.ReadResponse{

@@ -19,14 +19,14 @@ service ToDoService {
     // Read todo task
     rpc Read(ReadRequest) returns (ReadResponse) {
         option (google.api.http) = {
-            get: "/todo/{id}"
+            get: "/todo/{user}/{id}"
           };
     };
 
     // Update todo task
     rpc Update(UpdateRequest) returns (UpdateResponse) {
         option (google.api.http) = {
-            put: "/todo"
+            put: "/todo/{user}/{id}"
             body: "*"
           };
     };
@@ -34,21 +34,21 @@ service ToDoService {
     // Delete todo task
     rpc Delete(DeleteRequest) returns (DeleteResponse) {
         option (google.api.http) = {
-            delete: "/todo/{id}"
+            delete: "/todo/{user}/{id}"
           };
     };
 
     // Read all todo tasks
     rpc ReadAll(ReadAllRequest) returns (ReadAllResponse) {
         option (google.api.http) = {
-            get: "/todo"
+            get: "/todo/{user}"
           };
     };
 
     //markComplete
     rpc MarkComplete(MarkRequest) returns (MarkResponse) {
         option (google.api.http) = {
-            put: "/todo/mark/{id}" 
+            put: "/todo/mark/{user}/{id}" 
           };
     };
 }
@@ -66,6 +66,9 @@ message ToDo {
 
     // Date and time to remind the todo task
     int32 completed = 4;
+
+    //User name
+    string user = 5;
 }
 
 // Request data to create new todo task
@@ -83,6 +86,7 @@ message CreateResponse{
 // Request data to read todo task
 message ReadRequest{
     int32 id = 1;
+    string user = 2;
 }
 
 // Contains todo task data specified in by ID request
@@ -94,7 +98,9 @@ message ReadResponse{
 // Request data to update todo task
 message UpdateRequest{
     // Task entity to update
-    ToDo toDo = 1;
+    int32 id = 1;
+    ToDo toDo = 2;
+    string user = 3;
 }
 
 // Contains status of update operation
@@ -108,6 +114,7 @@ message UpdateResponse{
 message DeleteRequest{
     // Unique integer identifier of the todo task to delete
     int32 id = 1;
+    string user = 2;
 }
 
 // Contains status of delete operation
@@ -118,7 +125,9 @@ message DeleteResponse{
 }
 
 // Request data to read all todo task
-message ReadAllRequest{}
+message ReadAllRequest{
+    string user = 1;
+}
 
 // Contains list of all todo tasks
 message ReadAllResponse{
@@ -129,6 +138,7 @@ message ReadAllResponse{
 message MarkRequest{
     // Unique integer identifier of the todo task to mark as complete
     int32 id = 1;
+    string user = 2;
 }
 
 // response after mark complete

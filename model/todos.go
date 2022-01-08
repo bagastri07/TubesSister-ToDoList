@@ -20,11 +20,11 @@ DB Table Details
 -------------------------------------
 
 
-CREATE TABLE `todos` (`ID` integer,`Title` text,`Description` text,`Completed` integer DEFAULT 0,PRIMARY KEY (`ID`))
+CREATE TABLE `todos` (`ID` integer,`Title` text,`Description` text,`Completed` integer DEFAULT 0, `User` text, PRIMARY KEY (`ID`))
 
 JSON Sample
 -------------------------------------
-{    "id": 90,    "title": "WYCArUJPPvRkKKfkZDnjimZHD",    "description": "ihhHcfJiLOLYhZLyYnSMmhwnj",    "completed": 44}
+{    "id": 24,    "title": "LYCdwrjRhaiOZuLLmQUELiiVn",    "description": "DYcQFANAyPSuPUlPkLdYPmLDV",    "completed": 51,    "user": "WQZyPxMnJJcDOUhsjYcoicrBU"}
 
 
 
@@ -40,13 +40,15 @@ type Todos struct {
 	Description string `gorm:"column:Description;type:text;" json:"description"`
 	//[ 3] Completed                                      integer              null: true   primary: false  isArray: false  auto: false  col: integer         len: -1      default: [0]
 	Completed int32 `gorm:"column:Completed;type:integer;default:0;" json:"completed"`
+	//[ 4] User                                           text                 null: true   primary: false  isArray: false  auto: false  col: text            len: -1      default: []
+	User string `gorm:"column:User;type:text;" json:"user"`
 }
 
 var todosTableInfo = &TableInfo{
 	Name: "todos",
 	Columns: []*ColumnInfo{
 
-		{
+		&ColumnInfo{
 			Index:              0,
 			Name:               "ID",
 			Comment:            ``,
@@ -67,7 +69,7 @@ var todosTableInfo = &TableInfo{
 			ProtobufPos:        1,
 		},
 
-		{
+		&ColumnInfo{
 			Index:              1,
 			Name:               "Title",
 			Comment:            ``,
@@ -88,7 +90,7 @@ var todosTableInfo = &TableInfo{
 			ProtobufPos:        2,
 		},
 
-		{
+		&ColumnInfo{
 			Index:              2,
 			Name:               "Description",
 			Comment:            ``,
@@ -109,7 +111,7 @@ var todosTableInfo = &TableInfo{
 			ProtobufPos:        3,
 		},
 
-		{
+		&ColumnInfo{
 			Index:              3,
 			Name:               "Completed",
 			Comment:            ``,
@@ -128,6 +130,27 @@ var todosTableInfo = &TableInfo{
 			ProtobufFieldName:  "completed",
 			ProtobufType:       "int32",
 			ProtobufPos:        4,
+		},
+
+		&ColumnInfo{
+			Index:              4,
+			Name:               "User",
+			Comment:            ``,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "text",
+			DatabaseTypePretty: "text",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "text",
+			ColumnLength:       -1,
+			GoFieldName:        "User",
+			GoFieldType:        "sql.NullString",
+			JSONFieldName:      "user",
+			ProtobufFieldName:  "user",
+			ProtobufType:       "string",
+			ProtobufPos:        5,
 		},
 	},
 }
