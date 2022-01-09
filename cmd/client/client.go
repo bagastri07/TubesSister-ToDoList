@@ -236,7 +236,11 @@ func main() {
 			fmt.Println()
 			pressEnterMenu()
 		default:
-			fmt.Printf("Input salah, ulangi!!! \n\n")
+			if input == 7 {
+				fmt.Println("Terimakasih, sampai jumpa", user)
+			} else {
+				fmt.Printf("Input salah, ulangi!!! \n\n")
+			}
 		}
 	}
 }
