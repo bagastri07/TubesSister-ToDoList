@@ -1,7 +1,6 @@
 package db
 
 import (
-	"github.com/bagastri07/TubesSister-ToDoList/model"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -14,7 +13,7 @@ func GetDBConnection() *gorm.DB {
 	if err != nil {
 		panic(err)
 	}
-	db.AutoMigrate(&model.Todos{})
+	// db.AutoMigrate(&model.Todos{})
 
 	return db
 }

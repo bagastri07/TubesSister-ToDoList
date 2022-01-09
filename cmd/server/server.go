@@ -15,6 +15,8 @@ import (
 func main() {
 
 	todoServiceServer := handlers.NewTodoServiceServer()
+	const grpcGatewayAddress = "0.0.0.0:7001"
+	const grpcAddress = "0.0.0.0:7000"
 
 	//grpc gateway
 	go func() {
@@ -24,10 +26,10 @@ func main() {
 		protobuf.RegisterToDoServiceHandlerServer(context.Background(), mux, todoServiceServer)
 
 		//http server
-		log.Fatalln(http.ListenAndServe("0.0.0.0:7001", mux))
+		log.Fatalln(http.ListenAndServe(grpcGatewayAddress, mux))
 	}()
 
-	lis, err := net.Listen("tcp", "0.0.0.0:7000")
+	lis, err := net.Listen("tcp", grpcAddress)
 	if err != nil {
 		log.Fatalf("Failed to listen to the port: %v", err)
 	}
@@ -39,7 +41,10 @@ func main() {
 	protobuf.RegisterToDoServiceServer(server, todoServiceServer)
 
 	//Run server
+
+	log.Println("gRPC Server is Runing on", grpcAddress)
 	if err := server.Serve(lis); err != nil {
 		log.Fatal(err.Error())
 	}
+
 }

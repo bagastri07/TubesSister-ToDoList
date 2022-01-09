@@ -155,26 +155,26 @@ var todosTableInfo = &TableInfo{
 	},
 }
 
-// TableName sets the insert table name for this struct type
-func (t *Todos) TableName() string {
-	return "todos"
-}
+// // TableName sets the insert table name for this struct type
+// func (t *Todos) TableName() string {
+// 	return "todos"
+// }
 
-// BeforeSave invoked before saving, return an error if field is not populated.
-func (t *Todos) BeforeSave() error {
-	return nil
-}
+// // BeforeSave invoked before saving, return an error if field is not populated.
+// func (t *Todos) BeforeSave() error {
+// 	return nil
+// }
 
-// Prepare invoked before saving, can be used to populate fields etc.
-func (t *Todos) Prepare() {
-}
+// // Prepare invoked before saving, can be used to populate fields etc.
+// func (t *Todos) Prepare() {
+// }
 
-// Validate invoked before performing action, return an error if field is not populated.
-func (t *Todos) Validate(action Action) error {
-	return nil
-}
+// // Validate invoked before performing action, return an error if field is not populated.
+// func (t *Todos) Validate(action Action) error {
+// 	return nil
+// }
 
-// TableInfo return table meta data
-func (t *Todos) TableInfo() *TableInfo {
-	return todosTableInfo
-}
+// // TableInfo return table meta data
+// func (t *Todos) TableInfo() *TableInfo {
+// 	return todosTableInfo
+// }
