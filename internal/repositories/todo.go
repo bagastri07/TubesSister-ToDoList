@@ -105,6 +105,10 @@ func (r *TodoRepository) DeleteTodo(req *todo.DeleteRequest) (*todo.DeleteRespon
 		return nil, err
 	}
 
+	if result.RowsAffected <= 0 {
+		return nil, errors.New("Not Found")
+	}
+
 	return &todo.DeleteResponse{
 		Deleted: int32(result.RowsAffected),
 	}, nil
