@@ -57,6 +57,8 @@ func main() {
 	}
 	defer conn.Close()
 
+	log.Println("Client has connected to the server on :", todoServiceAddress)
+
 	//create New Service
 	todoServiceClient := todo.NewToDoServiceClient(conn)
 
